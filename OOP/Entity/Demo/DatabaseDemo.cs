@@ -7,54 +7,47 @@ namespace Entity.Demo
 {
     internal class DatabaseDemo
     {
-        Database database = new Database();
-        void insertTableTest()
+        public static Database database = new Database();
+        public static int insertTableTest()
         {
-            object row = new object();
-            string name = "product";
-            database.InsertTable(name, row);
+            BaseRow row = new Product();
+            string name = "Product";
+            return database.InsertTable(name, row);
         }
 
-        List<object> selectTableTest()
+        public static List<BaseRow> selectTableTest()
         {
-            string name = "product";
-            object where = new object();
+            string name = "Product";
+            BaseRow where = new Product();
             return database.SelectTable(name, where);
         }
 
-        public void UpdateTableTest()
+        public static int UpdateTableTest()
         {
-            object row = new object();
-            string name = "product";
-            database.UpdateTable(name, row);
+            BaseRow row = new Product();
+            string name = "Product";
+            int id = 1;
+            database.UpdateTableById(id, row);
+            return database.UpdateTable(name, row);
         }
 
-        public void DeleteTableTest()
+        public static bool DeleteTableTest()
         {
-            object row = new object();
-            string name = "product";
-            database.DeleteTable(name, row);
+            BaseRow row = new Product();
+            string name = "Product";
+            return database.DeleteTable(name, row);
         }
 
-        public void TruncateTableTest()
+        public static void TruncateTableTest()
         {
-            string name = "product";
+            string name = "Product";
             database.TruncateTable(name);
         }
 
-        public void UpdateTableByIdTest()
-        {
-            Product product = new Product();
-            int id = 1;
-            database.UpdateTableById(id, product);
-        }
-
-        void initDatabase()
+        public static void initDatabase()
         {
             for (int i = 1; i <= 10; i++)
             {
-                Database database = new Database();
-
                 Product product = new Product(1, "product", 2);
                 database.productTable.Add(product);
                 Category category = new Category(1, "category");
@@ -63,9 +56,8 @@ namespace Entity.Demo
                 database.accesssoryTable.Add(accessotion);
             }
         }
-        void PrintTableTest()
+        public static void PrintTableTest()
         {
-            Database database = new Database();
             foreach (object row in database.productTable)
             {
                 Console.WriteLine(row);
@@ -80,11 +72,24 @@ namespace Entity.Demo
             }
         }
 
-        public void insertTest()
+        public static void insertTest()
         {
             CategoryDAO categoryDAO = new CategoryDAO();
             Category row = new Category();
             categoryDAO.Insert(row);
+            Console.WriteLine(123);
         }
+
+        //public static void Main(string[] args)
+        //{
+        //    Console.WriteLine(insertTableTest());
+        //    Console.WriteLine(selectTableTest());
+        //    Console.WriteLine(UpdateTableTest());
+        //    Console.WriteLine(DeleteTableTest());
+        //    TruncateTableTest();
+        //    initDatabase();
+        //    PrintTableTest();
+        //    insertTest();
+        //}
     }
 }

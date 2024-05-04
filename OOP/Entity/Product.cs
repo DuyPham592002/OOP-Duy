@@ -1,37 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entity
+﻿namespace Entity
 {
-    internal class Product
+    internal class Product : BaseRow
     {
-        private int id;
-        private string name;
+
         private int categoryId;
 
-        public int getId()
-        {
-            return id;
-        }
-        public string getName()
-        {
-            return name;
-        }
-        public int getCategoryId()
-        {
-            return categoryId;
-        }
-        public void setName(string name)
-        {
-            this.name = name;
-        }
-        public void setId(int id)
-        {
-            this.id = id;
-        }
         public void setCategoryId(int categoryId)
         {
             this.categoryId = categoryId;

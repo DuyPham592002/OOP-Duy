@@ -3,44 +3,21 @@ using System.Collections.Generic;
 
 namespace Entity.DAO
 {
-    internal class ProductDAO
+    internal class ProductDAO : BaseDAO
     {
-        Database db = new Database();
-
-        public bool Insert(Product row)
-        {
-            db.InsertTable("product", row);
-            return db.productTable.Contains(row);
-        }
-
-        public void Update(Product row)
-        {
-            db.UpdateTable("product", row);
-        }
-
-        void Delete(Product row)
-        {
-            db.DeleteTable("product", row);
-        }
-
-        public List<object> FindAll(Product row)
-        {
-            return db.SelectTable("product", row);
-        }
-
-        object FindById(int id)
+        public BaseRow FindById(int id)
         {
             for (int i = 0; i < db.productTable.Count; i++)
             {
                 if (db.productTable[i].getId() == id)
                 {
-                    return db.catagoryTable[i];
+                    return db.productTable[i];
                 }
             }
             return null;
         }
 
-        object FindByName(string name)
+        public BaseRow FindByName(string name)
         {
             for (int i = 0; i < db.productTable.Count; i++)
             {

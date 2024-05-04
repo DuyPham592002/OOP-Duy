@@ -9,22 +9,47 @@ namespace Entity.Demo
 {
     internal class ProductDAODemo
     {
-        ProductDAO productDAO = new ProductDAO();
-        Product row = new Product(1, "category" , 2);
+        static ProductDAO productDAO = new ProductDAO();
+        static Product row = new Product(1, "Product" , 2);
 
-        void InsertTest()
+        static int InsertTest()
         {
-            productDAO.Insert(row);
+            return productDAO.Insert(row);
         }
 
-        void UpdateTest()
+        static int UpdateTest()
         {
-            productDAO.Update(row);
+            return productDAO.Update(row);
         }
 
-        void FindAllTest()
+        static bool DeleteTest()
         {
-            productDAO.FindAll(row);
+            return productDAO.Delete(row);
         }
+
+        static List<BaseRow> FindAllTest()
+        {
+            return productDAO.FindAll(row);
+        }
+
+        static BaseRow FindByIdTest()
+        {
+            return productDAO.FindById(1);
+        }
+
+        static BaseRow FindByNameTest()
+        {
+            return productDAO.FindByName("Product");
+        }
+
+        //public static void Main(string[] args)
+        //{
+        //    Console.WriteLine(InsertTest());
+        //    Console.WriteLine(UpdateTest());
+        //    Console.WriteLine(DeleteTest());
+        //    Console.WriteLine(FindAllTest());
+        //    Console.WriteLine(FindByIdTest());
+        //    Console.WriteLine(FindByNameTest());
+        //}
     }
 }

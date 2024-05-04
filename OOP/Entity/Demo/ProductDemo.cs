@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entity.Demo
 {
@@ -18,13 +14,17 @@ namespace Entity.Demo
         }
         public void PrintProduct(Product product)
         {
-            if (product != null) { Console.WriteLine("Product not null ."); }
+            if (product != null)
+            {
+                Console.WriteLine("Product not null .");
+                return;
+            }
             Console.WriteLine("Product is null.");
         }
-        static void Main(string[] args)
-        {
-            ProductDemo demo = new ProductDemo();
-            demo.PrintProduct(demo.CreateProductTest());
-        }
+        //static void Main(string[] args)
+        //{
+        //    ProductDemo demo = new ProductDemo();
+        //    demo.PrintProduct(demo.CreateProductTest());
+        //}
     }
 }

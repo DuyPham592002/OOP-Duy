@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Entity.DAO
@@ -7,154 +8,159 @@ namespace Entity.DAO
     {
         internal class Database
         {
-            public List<Product> productTable = new List<Product>();
-            public List<Category> catagoryTable = new List<Category>();
-            public List<Accesstion> accesssoryTable = new List<Accesstion>();
-            public Database instants;
+            public List<BaseRow> productTable = new List<BaseRow>();
+            public List<BaseRow> catagoryTable = new List<BaseRow>();
+            public List<BaseRow> accesssoryTable = new List<BaseRow>();
+            public static Database instants;
 
-            public void InsertTable(string name, object row)
+            public int InsertTable(string name, BaseRow row)
             {
-
-                if (name == "product")
+                if (name == StringCache.NAME_PRODUCT)
                 {
                     productTable.Add((Product)row);
-                    return;
+                    return 1;
                 }
-                if (name == "category")
+
+                if (name == StringCache.NAME_CATEGORY)
                 {
                     catagoryTable.Add((Category)row);
-                    return;
+                    return 1;
                 }
-                if (name == "accessotion")
+
+                if (name == StringCache.NAME_ACCESSTION)
                 {
                     accesssoryTable.Add((Accesstion)row);
-                    return;
+                    return 1;
                 }
+                return 0;
             }
 
-            public List<object> SelectTable(string name, object where)
+            public List<BaseRow> SelectTable(string name, BaseRow where)
             {
-                if (name == "product")
+                if (name == StringCache.NAME_PRODUCT)
                 {
-                    return productTable.Cast<object>().ToList();
+                    return productTable;
                 }
-                if (name == "category")
+                if (name == StringCache.NAME_CATEGORY)
                 {
-                    return catagoryTable.Cast<object>().ToList();
+                    return catagoryTable;
                 }
-                if (name == "accessotion")
+                if (name == StringCache.NAME_ACCESSTION)
                 {
-                    return accesssoryTable.Cast<object>().ToList();
+                    return accesssoryTable;
                 }
                 return null;
             }
 
-            public void UpdateTable(string name, object row)
+            public int UpdateTable(string name, BaseRow row)
             {
-                if (name == "category")
+                if (name == StringCache.NAME_CATEGORY)
                 {
                     Category updatedcategory = (Category)row;
-                    int idToUpdate = updatedcategory.getId();
+                    int idCategory = updatedcategory.getId();
                     foreach (Category category in catagoryTable)
                     {
-                        if (category.getId() == idToUpdate)
+                        if (category.getId() == idCategory)
                         {
-                            category.setName(category.getName());
+                            category.setName(updatedcategory.getName());
+                            return 1;
                         }
-                    }
-                    return;
+                    }              
                 }
-                if (name == "accessotion")
+
+                if (name == StringCache.NAME_ACCESSTION)
                 {
                     Product updatedAccessotion = (Product)row;
-                    int idToUpdate = updatedAccessotion.getId();
+                    int idAccesstion = updatedAccessotion.getId();
 
                     foreach (Accesstion accessotion in accesssoryTable)
                     {
-                        if (accessotion.getId() == idToUpdate)
+                        if (accessotion.getId() == idAccesstion)
                         {
-                            accessotion.setName(accessotion.getName());
+                            accessotion.setName(updatedAccessotion.getName());
+                            return 1;
                         }
-                    }
-                    return;
+                    }                  
                 }
-                if (name == "product")
+
+                if (name == StringCache.NAME_PRODUCT)
                 {
                     Product updatedProduct = (Product)row;
-                    int idToUpdate = updatedProduct.getId();
+                    int idProduct = updatedProduct.getId();
 
                     foreach (Product product in productTable)
                     {
-                        if (product.getId() == idToUpdate)
+                        if (product.getId() == idProduct)
                         {
                             product.setName(updatedProduct.getName());
+                            return 1;
                         }
-                    }
-                    return;
+                    }                   
                 }
+                return 0;
             }
 
-            public void DeleteTable(string name, object row)
+            public bool DeleteTable(string name, BaseRow row)
             {
-                if (name == "category")
+                if (name == StringCache.NAME_CATEGORY)
                 {
                     Category updatedcategory = (Category)row;
-                    int idToUpdate = updatedcategory.getId();
-                    foreach (Category category in catagoryTable)
+                    int idCategory = updatedcategory.getId();
+                    for (int i = 0; i<catagoryTable.Count; i++)
                     {
-                        if (category.getId() == idToUpdate)
+                        if (catagoryTable[i].getId() == idCategory)
                         {
-                            catagoryTable.Remove(category);
+                            catagoryTable.RemoveAt(i);
                         }
                     }
-                    return;
+                    return true;
                 }
-                if (name == "accessotion")
+                if (name == StringCache.NAME_ACCESSTION)
                 {
                     Product updatedAccessotion = (Product)row;
-                    int idToUpdate = updatedAccessotion.getId();
-
-                    foreach (Accesstion accessotion in accesssoryTable)
+                    int idAccesstion = updatedAccessotion.getId();
+                    for (int i = 0; i < accesssoryTable.Count; i++)
                     {
-                        if (accessotion.getId() == idToUpdate)
-                        {
-                            accesssoryTable.Remove(accessotion);
+                        if (accesssoryTable[i].getId() == idAccesstion)
+                        { 
+                            accesssoryTable.RemoveAt(i);
                         }
                     }
-                    return;
+                    return true;
                 }
-                if (name == "product")
+                if (name == StringCache.NAME_PRODUCT)
                 {
                     Product updatedProduct = (Product)row;
-                    int idToUpdate = updatedProduct.getId();
-
-                    foreach (Product product in productTable)
+                    int idProduct = updatedProduct.getId();
+                    for (int i = 0; i < productTable.Count; i++)
                     {
-                        if (product.getId() == idToUpdate)
+                        if (productTable[i].getId() == idProduct)
                         {
-                            productTable.Remove(product);
+                            productTable.RemoveAt(i);
                         }
                     }
-                    return;
+                    return true;
                 }
+
+                return false;
             }
 
             public void TruncateTable(string name)
             {
-                if (name == "Product")
+                if (name == StringCache.NAME_PRODUCT)
                 {
                     productTable.Clear();
                 }
-                else if (name == "Category")
+                else if (name == StringCache.NAME_CATEGORY)
                 {
                     catagoryTable.Clear();
                 }
-                else if (name == "Accessory")
+                else if (name == StringCache.NAME_ACCESSTION)
                 {
                     accesssoryTable.Clear();
                 }
             }
-            public void UpdateTableById(int id, object row)
+            public void UpdateTableById(int id, BaseRow row)
             {
                 if (row is Product)
                 {
@@ -163,11 +169,12 @@ namespace Entity.DAO
                         if (productTable[i].getId() == id)
                         {
                             productTable[i] = (Product)row;
-                            break;
                         }
                     }
+                    return;
                 }
-                else if (row is Category)
+
+                if (row is Category)
                 {
                     for (int i = 0; i < catagoryTable.Count; i++)
                     {
@@ -177,8 +184,11 @@ namespace Entity.DAO
                             break;
                         }
                     }
+                    return;
                 }
-                else if (row is Product)
+
+
+                 if (row is Accesstion)
                 {
                     for (int i = 0; i < accesssoryTable.Count; i++)
                     {
@@ -188,8 +198,16 @@ namespace Entity.DAO
                             break;
                         }
                     }
+                    return;
                 }
             }
+        }
+
+        public static class StringCache
+        {
+            public const string NAME_PRODUCT = "Product";
+            public const string NAME_CATEGORY = "Category";
+            public const string NAME_ACCESSTION = "Accesstion";
         }
     }
 }

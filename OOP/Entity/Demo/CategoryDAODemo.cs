@@ -9,22 +9,41 @@ namespace Entity.Demo
 {
     internal class CategoryDAODemo
     {
-        CategoryDAO categoryDao = new CategoryDAO();
-        Category row = new Category(1 , "category");
+        static CategoryDAO categoryDao = new CategoryDAO();
+        static Category row = new Category(1 , "category");
 
-        void InsertTest()
+        static int InsertTest()
         {
-            categoryDao.Insert(row);
+            return categoryDao.Insert(row);
         }
 
-        void UpdateTest()
+        static int UpdateTest()
         {
-            categoryDao.Update(row);
+           return categoryDao.Update(row);
         }
 
-        void FindAllTest()
+        static bool DeleteTest()
         {
-            categoryDao.FindAll(row);
+            return categoryDao.Delete(row);
+        }
+
+        static List<BaseRow> FindAllTest()
+        {
+            return categoryDao.FindAll(row);           
+        }
+
+        static BaseRow FindByIdTest()
+        {
+            return categoryDao.FindById(1);
+        }
+
+        public static void Main(string[] args)
+        {
+            Console.WriteLine(InsertTest());
+            Console.WriteLine(UpdateTest());
+            Console.WriteLine(DeleteTest());
+            Console.WriteLine(FindAllTest());
+            Console.WriteLine(FindByIdTest());
         }
     }
 }

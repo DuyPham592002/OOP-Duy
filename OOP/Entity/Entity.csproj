@@ -44,15 +44,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accesstion.cs" />
+    <Compile Include="BaseRow.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="DAO\AccessoryDAO.cs" />
+    <Compile Include="DAO\BaseDAO.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\Database.cs" />
+    <Compile Include="DAO\IDao.cs" />
     <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="Demo\CategoryDAODemo.cs" />
     <Compile Include="Demo\DatabaseDemo.cs" />
     <Compile Include="Demo\ProductDAODemo.cs" />
     <Compile Include="Demo\ProductDemo.cs" />
+    <Compile Include="IEnity.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
