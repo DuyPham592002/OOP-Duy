@@ -3,27 +3,20 @@ using System.Collections.Generic;
 
 namespace Entity.DAO
 {
-    internal class ProductDAO : BaseDAO
+    internal class ProductDAO : BaseDAO , IDao
     {
-        public BaseRow FindById(int id)
-        {
-            for (int i = 0; i < db.productTable.Count; i++)
-            {
-                if (db.productTable[i].getId() == id)
-                {
-                    return db.productTable[i];
-                }
-            }
-            return null;
-        }
-
+        /// <summary>
+        /// find name in table
+        /// </summary>
+        /// <param name="name">string</param>
+        /// <returns>BaseRow</returns>
         public BaseRow FindByName(string name)
         {
-            for (int i = 0; i < db.productTable.Count; i++)
+            for (int i = 0; i < instance.GetProductTable().Count; i++)
             {
-                if (db.productTable[i].getName() == name)
+                if (instance.GetProductTable()[i].getName() == name)
                 {
-                    return db.productTable[i];
+                    return instance.GetProductTable()[i];
                 }
             }
             return null;

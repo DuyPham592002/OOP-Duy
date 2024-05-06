@@ -21,7 +21,8 @@ namespace Entity.Demo
             }
             Console.WriteLine("Product is null.");
         }
-        //static void Main(string[] args)
+
+        //public static void Main(string[] args)
         //{
         //    ProductDemo demo = new ProductDemo();
         //    demo.PrintProduct(demo.CreateProductTest());

@@ -34,7 +34,7 @@ namespace Entity.Demo
 
         static BaseRow FindByIdTest()
         {
-            return productDAO.FindById(1);
+            return productDAO.FindById(1 , row);
         }
 
         static BaseRow FindByNameTest()

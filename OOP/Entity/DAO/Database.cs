@@ -1,18 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Entity.DAO
 {
     namespace DAO
     {
-        internal class Database
+        public class Database
         {
-            public List<BaseRow> productTable = new List<BaseRow>();
-            public List<BaseRow> catagoryTable = new List<BaseRow>();
-            public List<BaseRow> accesssoryTable = new List<BaseRow>();
-            public static Database instants;
+            private List<BaseRow> productTable = new List<BaseRow>();
+            private List<BaseRow> catagoryTable = new List<BaseRow>();
+            private List<BaseRow> accesssoryTable = new List<BaseRow>();
+            private static Database instance;
 
+            /// <summary>
+            /// no parameters
+            /// </summary>
+            private Database() { }
+
+            /// <summary>
+            /// singleton
+            /// </summary>
+            /// <returns>Database</returns>
+            public static Database GetInstance()
+            {
+                if (instance == null)
+                {
+                    instance = new Database();
+                }
+                return instance;
+            }
+
+            /// <summary>
+            /// get list productTable
+            /// </summary>
+            /// <returns>List<BaseRow></returns>
+            public List<BaseRow> GetProductTable()
+            {
+                return productTable;
+            }
+
+            /// <summary>
+            /// get list catagoryTable
+            /// </summary>
+            /// <returns>List<BaseRow></returns>
+            public List<BaseRow> GetCatagoryTable()
+            {
+                return catagoryTable;
+            }
+
+            /// <summary>
+            /// get list accesssoryTable
+            /// </summary>
+            /// <returns>List<BaseRow></returns>
+            public List<BaseRow> GetAccesssoryTable()
+            {
+                return accesssoryTable;
+            }
+
+            /// <summary>
+            /// insert row to table 
+            /// </summary>
+            /// <param name="name">string</param>
+            /// <param name="row">BaseRow</param>
+            /// <returns>int</returns>
             public int InsertTable(string name, BaseRow row)
             {
                 if (name == StringCache.NAME_PRODUCT)
@@ -35,7 +85,12 @@ namespace Entity.DAO
                 return 0;
             }
 
-            public List<BaseRow> SelectTable(string name, BaseRow where)
+            /// <summary>
+            /// Select table with name
+            /// </summary>
+            /// <param name="name">string</param>
+            /// <returns>List<BaseRow></returns>
+            public List<BaseRow> SelectTable(string name)
             {
                 if (name == StringCache.NAME_PRODUCT)
                 {
@@ -52,6 +107,12 @@ namespace Entity.DAO
                 return null;
             }
 
+            /// <summary>
+            /// update row in table with name
+            /// </summary>
+            /// <param name="name">string</param>
+            /// <param name="row">BaseRow</param>
+            /// <returns>int</returns>
             public int UpdateTable(string name, BaseRow row)
             {
                 if (name == StringCache.NAME_CATEGORY)
@@ -65,7 +126,7 @@ namespace Entity.DAO
                             category.setName(updatedcategory.getName());
                             return 1;
                         }
-                    }              
+                    }
                 }
 
                 if (name == StringCache.NAME_ACCESSTION)
@@ -80,7 +141,7 @@ namespace Entity.DAO
                             accessotion.setName(updatedAccessotion.getName());
                             return 1;
                         }
-                    }                  
+                    }
                 }
 
                 if (name == StringCache.NAME_PRODUCT)
@@ -95,18 +156,24 @@ namespace Entity.DAO
                             product.setName(updatedProduct.getName());
                             return 1;
                         }
-                    }                   
+                    }
                 }
                 return 0;
             }
 
+            /// <summary>
+            /// delete row in table with name
+            /// </summary>
+            /// <param name="name">string</param>
+            /// <param name="row">BaseRow</param>
+            /// <returns>bool</returns>
             public bool DeleteTable(string name, BaseRow row)
             {
                 if (name == StringCache.NAME_CATEGORY)
                 {
                     Category updatedcategory = (Category)row;
                     int idCategory = updatedcategory.getId();
-                    for (int i = 0; i<catagoryTable.Count; i++)
+                    for (int i = 0; i < catagoryTable.Count; i++)
                     {
                         if (catagoryTable[i].getId() == idCategory)
                         {
@@ -122,7 +189,7 @@ namespace Entity.DAO
                     for (int i = 0; i < accesssoryTable.Count; i++)
                     {
                         if (accesssoryTable[i].getId() == idAccesstion)
-                        { 
+                        {
                             accesssoryTable.RemoveAt(i);
                         }
                     }
@@ -144,7 +211,11 @@ namespace Entity.DAO
 
                 return false;
             }
-
+            
+            /// <summary>
+            /// delete table with name
+            /// </summary>
+            /// <param name="name">string</param>
             public void TruncateTable(string name)
             {
                 if (name == StringCache.NAME_PRODUCT)
@@ -160,7 +231,14 @@ namespace Entity.DAO
                     accesssoryTable.Clear();
                 }
             }
-            public void UpdateTableById(int id, BaseRow row)
+
+            /// <summary>
+            /// update row to table with id
+            /// </summary>
+            /// <param name="id">int</param>
+            /// <param name="row">BaseRow</param>
+            /// <returns>int</returns>
+            public int UpdateTableById(int id, BaseRow row)
             {
                 if (row is Product)
                 {
@@ -171,7 +249,7 @@ namespace Entity.DAO
                             productTable[i] = (Product)row;
                         }
                     }
-                    return;
+                    return 1;
                 }
 
                 if (row is Category)
@@ -184,11 +262,10 @@ namespace Entity.DAO
                             break;
                         }
                     }
-                    return;
+                    return 1;
                 }
 
-
-                 if (row is Accesstion)
+                if (row is Accesstion)
                 {
                     for (int i = 0; i < accesssoryTable.Count; i++)
                     {
@@ -198,9 +275,10 @@ namespace Entity.DAO
                             break;
                         }
                     }
-                    return;
+                    return 1;
                 }
-            }
+                return 0;
+            }      
         }
 
         public static class StringCache
@@ -211,4 +289,3 @@ namespace Entity.DAO
         }
     }
 }
-

@@ -4,6 +4,10 @@ namespace Entity.DAO
 {
     public interface IDao
     {
-        BaseRow FindById(int id);
+        int Insert(BaseRow row);
+        int Update(BaseRow row);
+        bool Delete(BaseRow row);
+        List<BaseRow> FindAll(BaseRow row);
+        BaseRow FindById(int id , BaseRow row);
     }
 }

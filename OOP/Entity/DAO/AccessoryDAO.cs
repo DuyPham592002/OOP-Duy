@@ -5,17 +5,21 @@ namespace Entity.DAO
 {
     internal class AccessoryDAO : BaseDAO , IDao
     {
-        public BaseRow FindById(int id)
+        /// <summary>
+        /// find name in table
+        /// </summary>
+        /// <param name="name">string</param>
+        /// <returns>BaseRow</returns>
+        public BaseRow FindByName(string name)
         {
-            for (int i = 0; i < db.accesssoryTable.Count; i++)
+            for (int i = 0; i < instance.GetAccesssoryTable().Count; i++)
             {
-                if (db.accesssoryTable[i].getId() == id)
+                if (instance.GetAccesssoryTable()[i].getName() == name)
                 {
-                    return db.accesssoryTable[i];
+                    return instance.GetAccesssoryTable()[i];
                 }
             }
             return null;
         }
     }
 }
-

@@ -43,9 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accesstion.cs" />
-    <Compile Include="BaseRow.cs" />
-    <Compile Include="Category.cs" />
+    <Compile Include="Enity\Accesstion.cs" />
+    <Compile Include="Enity\BaseRow.cs" />
+    <Compile Include="Enity\Category.cs" />
     <Compile Include="DAO\AccessoryDAO.cs" />
     <Compile Include="DAO\BaseDAO.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
@@ -56,8 +56,8 @@
     <Compile Include="Demo\DatabaseDemo.cs" />
     <Compile Include="Demo\ProductDAODemo.cs" />
     <Compile Include="Demo\ProductDemo.cs" />
-    <Compile Include="IEnity.cs" />
-    <Compile Include="Product.cs" />
+    <Compile Include="Enity\IEnity.cs" />
+    <Compile Include="Enity\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,49 +1,50 @@
 ﻿using Entity.DAO;
+using Entity.DAO.DAO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entity.Demo
 {
     internal class CategoryDAODemo
     {
+        public Database instance = Database.GetInstance();
         static CategoryDAO categoryDao = new CategoryDAO();
-        static Category row = new Category(1 , "category");
+        static Category row = new Category(1, "category");
 
-        static int InsertTest()
+        public int InsertTest()
         {
-            return categoryDao.Insert(row);
+            return categoryDao.Insert(row);      
         }
 
-        static int UpdateTest()
+        public  int UpdateTest()
         {
-           return categoryDao.Update(row);
+            return categoryDao.Update(row);
         }
 
-        static bool DeleteTest()
+        public bool DeleteTest()
         {
             return categoryDao.Delete(row);
         }
 
-        static List<BaseRow> FindAllTest()
+        public List<BaseRow> FindAllTest()
         {
-            return categoryDao.FindAll(row);           
+            Console.WriteLine("ten la " + instance.GetCatagoryTable()[0].getName());
+            return categoryDao.FindAll(row);
         }
 
-        static BaseRow FindByIdTest()
+        public BaseRow FindByIdTest()
         {
-            return categoryDao.FindById(1);
+            return categoryDao.FindById( 1 , row);
         }
 
-        public static void Main(string[] args)
-        {
-            Console.WriteLine(InsertTest());
-            Console.WriteLine(UpdateTest());
-            Console.WriteLine(DeleteTest());
-            Console.WriteLine(FindAllTest());
-            Console.WriteLine(FindByIdTest());
-        }
+        //public static void Main(string[] args)
+        //{
+        //    CategoryDAODemo categoryDAODemo = new CategoryDAODemo();
+        //    Console.WriteLine(categoryDAODemo.InsertTest());
+        //    Console.WriteLine(categoryDAODemo.UpdateTest());
+        //    //Console.WriteLine(categoryDAODemo.DeleteTest());
+        //    Console.WriteLine(categoryDAODemo.FindAllTest());
+        //    Console.WriteLine(categoryDAODemo.FindByIdTest());
+        //}
     }
 }

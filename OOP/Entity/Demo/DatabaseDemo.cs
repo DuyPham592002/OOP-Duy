@@ -1,95 +1,94 @@
-﻿using Entity.DAO;
-using Entity.DAO.DAO;
+﻿using Entity.DAO.DAO;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Entity.Demo
 {
     internal class DatabaseDemo
     {
-        public static Database database = new Database();
-        public static int insertTableTest()
+        public Database instance = Database.GetInstance();
+        public int InsertTableTest()
         {
-            BaseRow row = new Product();
+            BaseRow row = new Product(1, "Product", 1);
             string name = "Product";
-            return database.InsertTable(name, row);
+            return instance.InsertTable(name, row);
         }
 
-        public static List<BaseRow> selectTableTest()
+        public List<BaseRow> SelectTableTest()
         {
             string name = "Product";
             BaseRow where = new Product();
-            return database.SelectTable(name, where);
+            Console.WriteLine("ID la : " + instance.GetProductTable()[0].getId());
+            Console.WriteLine("Name la : " + instance.GetProductTable()[0].getName());
+            return instance.SelectTable(name);
         }
 
-        public static int UpdateTableTest()
+        public int UpdateTableTest()
         {
+            Console.Write("update theo name la 1 , id la 2 :");
+            string choseNumber = Console.ReadLine();
+            switch (choseNumber)
+            {
+                case "1":
+                    BaseRow rowName = new Product(1, "Product2", 2);
+                    string name = "Product";
+                    return instance.UpdateTable(name, rowName);
+                case "2":
+                    BaseRow rowId = new Product(1, "Product3", 2);
+                    int id = 1;
+                    return instance.UpdateTableById(id, rowId);
+                default:
+                    return 3;
+            }
+        }
+
+        public bool DeleteTableTest()
+        {
+            Console.WriteLine("Name la : " + instance.GetProductTable()[0].getName());
             BaseRow row = new Product();
             string name = "Product";
-            int id = 1;
-            database.UpdateTableById(id, row);
-            return database.UpdateTable(name, row);
+            return instance.DeleteTable(name, row);
         }
 
-        public static bool DeleteTableTest()
-        {
-            BaseRow row = new Product();
-            string name = "Product";
-            return database.DeleteTable(name, row);
-        }
-
-        public static void TruncateTableTest()
+        public void TruncateTableTest()
         {
             string name = "Product";
-            database.TruncateTable(name);
+            instance.TruncateTable(name);
         }
 
-        public static void initDatabase()
+        public void InitDatabase()
         {
-            for (int i = 1; i <= 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 Product product = new Product(1, "product", 2);
-                database.productTable.Add(product);
+                instance.InsertTable("Product", product);
                 Category category = new Category(1, "category");
-                database.catagoryTable.Add(category);
+                instance.InsertTable("Category", category);
                 Accesstion accessotion = new Accesstion(1, "accessotion");
-                database.accesssoryTable.Add(accessotion);
+                instance.InsertTable("Accesstion", accessotion);
             }
         }
-        public static void PrintTableTest()
+        public void PrintTableTest()
         {
-            foreach (object row in database.productTable)
+            for (int i = 0; i < 10; i++)
             {
-                Console.WriteLine(row);
+                Console.WriteLine(instance.GetProductTable()[i].getName());
+                Console.WriteLine(instance.GetCatagoryTable()[i].getName());
+                Console.WriteLine(instance.GetAccesssoryTable()[i].getName());
             }
-            foreach (object row in database.catagoryTable)
-            {
-                Console.WriteLine(row);
-            }
-            foreach (object row in database.accesssoryTable)
-            {
-                Console.WriteLine(row);
-            }
-        }
-
-        public static void insertTest()
-        {
-            CategoryDAO categoryDAO = new CategoryDAO();
-            Category row = new Category();
-            categoryDAO.Insert(row);
-            Console.WriteLine(123);
         }
 
         //public static void Main(string[] args)
         //{
-        //    Console.WriteLine(insertTableTest());
-        //    Console.WriteLine(selectTableTest());
-        //    Console.WriteLine(UpdateTableTest());
-        //    Console.WriteLine(DeleteTableTest());
-        //    TruncateTableTest();
-        //    initDatabase();
-        //    PrintTableTest();
-        //    insertTest();
+        //    DatabaseDemo databaseDemo = new DatabaseDemo();
+        //    Console.WriteLine(databaseDemo.InsertTableTest());
+        //    Console.WriteLine(databaseDemo.SelectTableTest());
+        //    Console.WriteLine(databaseDemo.UpdateTableTest());
+        //    Console.WriteLine(databaseDemo.DeleteTableTest());
+        //    databaseDemo.TruncateTableTest();
+        //    databaseDemo.InitDatabase();
+        //    databaseDemo.PrintTableTest();
         //}
     }
 }

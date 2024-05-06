@@ -1,0 +1,7 @@
+F:\TTS-Unity\OOP\Entity\obj\Debug\OOP.csproj.AssemblyReference.cache
+F:\TTS-Unity\OOP\Entity\obj\Debug\OOP.csproj.CoreCompileInputs.cache
+F:\TTS-Unity\OOP\Entity\obj\Debug\Entity.exe
+F:\TTS-Unity\OOP\Entity\obj\Debug\Entity.pdb
+F:\TTS-Unity\OOP\Entity\bin\Debug\Entity.exe.config
+F:\TTS-Unity\OOP\Entity\bin\Debug\Entity.exe
+F:\TTS-Unity\OOP\Entity\bin\Debug\Entity.pdb
