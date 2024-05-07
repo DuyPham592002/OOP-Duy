@@ -1,6 +1,6 @@
 ﻿using Entity.DAO.DAO;
+using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
 
 namespace Entity.DAO
 {
@@ -12,33 +12,42 @@ namespace Entity.DAO
         /// insert row to table
         /// </summary>
         /// <param name="row">BaseRow</param>
-        /// <returns>int</returns>
+        /// <returns></returns>
         public int Insert(BaseRow row)
         {
-            instance.InsertTable(row.GetType().Name, row);
-            return 1;
+            if (instance.InsertTable(row.GetType().Name, row) == 1)
+            {
+                return 1;
+            }
+            return 0;
         }
 
         /// <summary>
         /// update row in table
         /// </summary>
         /// <param name="row">BaseRow</param>
-        /// <returns>int</returns>
+        /// <returns></returns>
         public int Update(BaseRow row)
         {
-            instance.UpdateTable(row.GetType().Name, row);
-            return 1;
+            if (instance.UpdateTable(row.GetType().Name, row) == 1)
+            {
+                return 1;
+            }
+            return 0;
         }
 
         /// <summary>
         /// delete row in table
         /// </summary>
         /// <param name="row">BaseRow</param>
-        /// <returns>bool</returns>
+        /// <returns></returns>
         public bool Delete(BaseRow row)
         {
-            instance.DeleteTable(row.GetType().Name, row);
-            return true;
+            if (instance.DeleteTable(row.GetType().Name, row) == true)
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -59,7 +68,7 @@ namespace Entity.DAO
         /// <returns>BaseRow</returns>
         public BaseRow FindById(int id, BaseRow row)
         {
-            if (row.GetType().Name == StringCache.NAME_CATEGORY)
+            if (row is Category)
             {
                 for (int i = 0; i < instance.GetCatagoryTable().Count; i++)
                 {
@@ -70,13 +79,24 @@ namespace Entity.DAO
                 }
             }
 
-            if (row.GetType().Name == StringCache.NAME_PRODUCT)
+            if (row is Product)
             {
                 for (int i = 0; i < instance.GetProductTable().Count; i++)
                 {
                     if (instance.GetProductTable()[i].getId() == id)
                     {
                         return instance.GetProductTable()[i];
+                    }
+                }
+            }
+
+            if (row is Accesstion)
+            {
+                for (int i = 0; i < instance.GetAccesssoryTable().Count; i++)
+                {
+                    if (instance.GetAccesssoryTable()[i].getId() == id)
+                    {
+                        return instance.GetAccesssoryTable()[i];
                     }
                 }
             }

@@ -1,0 +1,7 @@
+F:\TTS-Unity\DataStructureAndAlgorithms\DataStructureAndAlgorithms\obj\Debug\DataStructureAndAlgorithms.csproj.AssemblyReference.cache
+F:\TTS-Unity\DataStructureAndAlgorithms\DataStructureAndAlgorithms\obj\Debug\DataStructureAndAlgorithms.csproj.CoreCompileInputs.cache
+F:\TTS-Unity\DataStructureAndAlgorithms\DataStructureAndAlgorithms\bin\Debug\DataStructureAndAlgorithms.exe.config
+F:\TTS-Unity\DataStructureAndAlgorithms\DataStructureAndAlgorithms\bin\Debug\DataStructureAndAlgorithms.exe
+F:\TTS-Unity\DataStructureAndAlgorithms\DataStructureAndAlgorithms\bin\Debug\DataStructureAndAlgorithms.pdb
+F:\TTS-Unity\DataStructureAndAlgorithms\DataStructureAndAlgorithms\obj\Debug\DataStructureAndAlgorithms.exe
+F:\TTS-Unity\DataStructureAndAlgorithms\DataStructureAndAlgorithms\obj\Debug\DataStructureAndAlgorithms.pdb

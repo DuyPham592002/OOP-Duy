@@ -127,6 +127,7 @@ namespace Entity.DAO
                             return 1;
                         }
                     }
+                    return 2;
                 }
 
                 if (name == StringCache.NAME_ACCESSTION)
@@ -142,6 +143,7 @@ namespace Entity.DAO
                             return 1;
                         }
                     }
+                    return 2;
                 }
 
                 if (name == StringCache.NAME_PRODUCT)
@@ -157,6 +159,7 @@ namespace Entity.DAO
                             return 1;
                         }
                     }
+                    return 2;
                 }
                 return 0;
             }
@@ -178,22 +181,22 @@ namespace Entity.DAO
                         if (catagoryTable[i].getId() == idCategory)
                         {
                             catagoryTable.RemoveAt(i);
+                            return true;
                         }
                     }
-                    return true;
                 }
                 if (name == StringCache.NAME_ACCESSTION)
                 {
-                    Product updatedAccessotion = (Product)row;
+                    Accesstion updatedAccessotion = (Accesstion)row;
                     int idAccesstion = updatedAccessotion.getId();
                     for (int i = 0; i < accesssoryTable.Count; i++)
                     {
                         if (accesssoryTable[i].getId() == idAccesstion)
                         {
                             accesssoryTable.RemoveAt(i);
+                            return true;
                         }
-                    }
-                    return true;
+                    }                   
                 }
                 if (name == StringCache.NAME_PRODUCT)
                 {
@@ -204,11 +207,10 @@ namespace Entity.DAO
                         if (productTable[i].getId() == idProduct)
                         {
                             productTable.RemoveAt(i);
+                            return true;
                         }
-                    }
-                    return true;
+                    }              
                 }
-
                 return false;
             }
             

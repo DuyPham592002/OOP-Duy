@@ -1,4 +1,5 @@
 ﻿using Entity.DAO;
+using Entity.DAO.DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,47 +10,54 @@ namespace Entity.Demo
 {
     internal class ProductDAODemo
     {
-        static ProductDAO productDAO = new ProductDAO();
-        static Product row = new Product(1, "Product" , 2);
+        public Database instance = Database.GetInstance();
+        static ProductDAO productDao = new ProductDAO();
+        static Product row = new Product(1, "product" , 1);
 
-        static int InsertTest()
+        public int InsertTest()
         {
-            return productDAO.Insert(row);
+            return productDao.Insert(row);
         }
 
-        static int UpdateTest()
+        public int UpdateTest()
         {
-            return productDAO.Update(row);
+            Product row = new Product(1, "product2", 1);
+            return productDao.Update(row);
         }
 
-        static bool DeleteTest()
+        public bool DeleteTest()
         {
-            return productDAO.Delete(row);
+            return productDao.Delete(row);
         }
 
-        static List<BaseRow> FindAllTest()
+        public List<BaseRow> FindAllTest()
         {
-            return productDAO.FindAll(row);
+            return productDao.FindAll(row);
         }
 
-        static BaseRow FindByIdTest()
+        public BaseRow FindByIdTest()
         {
-            return productDAO.FindById(1 , row);
+            return productDao.FindById(1, row);
         }
 
-        static BaseRow FindByNameTest()
+        public BaseRow FindByNameTest(string name)
         {
-            return productDAO.FindByName("Product");
+            return productDao.FindById(1, row);
         }
 
         //public static void Main(string[] args)
         //{
-        //    Console.WriteLine(InsertTest());
-        //    Console.WriteLine(UpdateTest());
-        //    Console.WriteLine(DeleteTest());
-        //    Console.WriteLine(FindAllTest());
-        //    Console.WriteLine(FindByIdTest());
-        //    Console.WriteLine(FindByNameTest());
+        //    Database instance = Database.GetInstance();
+        //    ProductDAODemo productDAODemo = new ProductDAODemo();
+        //    productDAODemo.InsertTest();
+        //    Console.WriteLine("Ten va id sau khi nhap : " + instance.GetProductTable()[0].getName() +" "+ instance.GetProductTable()[0].getId());
+        //    productDAODemo.UpdateTest();
+        //    Console.WriteLine("Ten sau update : " + instance.GetProductTable()[0].getName());
+        //    //Console.WriteLine(productDAODemo.DeleteTest());
+        //    Console.WriteLine("tra ve mang : " + productDAODemo.FindAllTest());
+        //    Console.WriteLine("Ten object sau khi find by id : " + productDAODemo.FindByIdTest().getName());
+        //    Console.WriteLine("id object sau khi find by name : " + productDAODemo.FindByNameTest("produect2").getId());
+
         //}
     }
 }

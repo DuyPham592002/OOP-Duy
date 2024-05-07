@@ -1,7 +1,6 @@
 ﻿using Entity.DAO.DAO;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Entity.Demo
 {
@@ -19,14 +18,11 @@ namespace Entity.Demo
         {
             string name = "Product";
             BaseRow where = new Product();
-            Console.WriteLine("ID la : " + instance.GetProductTable()[0].getId());
-            Console.WriteLine("Name la : " + instance.GetProductTable()[0].getName());
             return instance.SelectTable(name);
         }
 
         public int UpdateTableTest()
         {
-            Console.Write("update theo name la 1 , id la 2 :");
             string choseNumber = Console.ReadLine();
             switch (choseNumber)
             {
@@ -45,8 +41,7 @@ namespace Entity.Demo
 
         public bool DeleteTableTest()
         {
-            Console.WriteLine("Name la : " + instance.GetProductTable()[0].getName());
-            BaseRow row = new Product();
+            BaseRow row = new Product(1,"product",1);
             string name = "Product";
             return instance.DeleteTable(name, row);
         }
@@ -81,13 +76,19 @@ namespace Entity.Demo
 
         //public static void Main(string[] args)
         //{
+        //    Database instance = Database.GetInstance();
         //    DatabaseDemo databaseDemo = new DatabaseDemo();
-        //    Console.WriteLine(databaseDemo.InsertTableTest());
-        //    Console.WriteLine(databaseDemo.SelectTableTest());
+        //    databaseDemo.InsertTableTest();
+        //    Console.WriteLine("Ten va id sau khi nhap : " + instance.GetProductTable()[0].getName() + instance.GetProductTable()[0].getId());
+        //    Console.WriteLine("tra về mang theo tên : " + databaseDemo.SelectTableTest());
+        //    Console.Write("update theo name la 1 , id la 2 :");
         //    Console.WriteLine(databaseDemo.UpdateTableTest());
-        //    Console.WriteLine(databaseDemo.DeleteTableTest());
-        //    databaseDemo.TruncateTableTest();
+        //    Console.WriteLine("Name sau update la : " + instance.GetProductTable()[0].getName());
+        //    Console.WriteLine("da delete chua :" + databaseDemo.DeleteTableTest());
+        //    //databaseDemo.TruncateTableTest();
+        //    //Console.WriteLine(instance.GetProductTable()[0].getName());
         //    databaseDemo.InitDatabase();
+        //    Console.WriteLine("danh sach : ");
         //    databaseDemo.PrintTableTest();
         //}
     }
